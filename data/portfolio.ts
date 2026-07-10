@@ -109,7 +109,7 @@ export type Experience = {
 export const experiences: Experience[] = [
   {
     role: "Frontend Developer",
-    company: "Root Academy",
+    company: "Route Academy",
     period: "Jun 2025 – Dec 2025",
     bullets: [
       "Developed and maintained 5+ responsive web applications using React and Next.js",
