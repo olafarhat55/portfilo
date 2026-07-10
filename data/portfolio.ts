@@ -136,6 +136,27 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    title: "MiniMaxi — AI Predictive Maintenance Platform",
+    description:
+      "A graduation-project SaaS platform for predictive equipment maintenance, featuring AI-powered insights, role-based dashboards for Admins, Engineers, and Technicians, and full Arabic/RTL localisation.",
+    techStack: [
+      "React.js",
+      "TypeScript",
+      "Vite",
+      "MUI v7",
+      "Java Spring Boot",
+      "PostgreSQL",
+    ],
+    github: "https://github.com/olafarhat55/minimaxi",
+    live: "https://minimaxi.vercel.app",
+    features: [
+      "AI-powered maintenance insights & alerts",
+      "Role-based access control (Admin / Engineer / Technician)",
+      "Real-time notifications with Socket.io",
+      "Full Arabic / RTL support (i18n)",
+    ],
+  },
+  {
     title: "E-Commerce UI Clone (ShopMart)",
     description:
       "A fully responsive e-commerce UI built from scratch with shopping cart, product filtering, and clean component architecture.",
