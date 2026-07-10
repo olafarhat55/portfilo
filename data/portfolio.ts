@@ -9,7 +9,7 @@ export const personalInfo = {
   location: "Egypt",
   email: "olafarhat579@gmail.com",
   phone: "01050509022",
-  linkedin: "https://www.linkedin.com/in/ola-farhat",
+  linkedin: "https://www.linkedin.com/in/ola-farhat-473561268/",
   github: "https://github.com/olafarhat55",
   cvPath: "/Ola_Farhat_CV.pdf",
   available: true,

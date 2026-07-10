@@ -69,5 +69,5 @@ npm run lint    # Run ESLint
 Front-End Developer — Egypt
 
 - GitHub: [github.com/olafarhat55](https://github.com/olafarhat55)
-- LinkedIn: [linkedin.com/in/ola-farhat](https://www.linkedin.com/in/ola-farhat)
+- LinkedIn: [linkedin.com/in/ola-farhat](https://www.linkedin.com/in/ola-farhat-473561268/)
 - Email: olafarhat579@gmail.com
