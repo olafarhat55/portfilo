@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { personalInfo, bio } from "@/data/portfolio";
+import Image from "next/image";
+import { personalInfo } from "@/data/portfolio";
 
 /** Typing animation that cycles through an array of strings. */
 function useTypingEffect(words: string[], typingSpeed = 80, deletingSpeed = 50, pauseMs = 1800) {
@@ -15,16 +16,13 @@ function useTypingEffect(words: string[], typingSpeed = 80, deletingSpeed = 50, 
 
     const timeout = setTimeout(() => {
       if (!deleting) {
-        // Typing phase
         setDisplayed(current.slice(0, charIndex + 1));
         if (charIndex + 1 === current.length) {
-          // Pause before deleting
           setTimeout(() => setDeleting(true), pauseMs);
         } else {
           setCharIndex((c) => c + 1);
         }
       } else {
-        // Deleting phase
         setDisplayed(current.slice(0, charIndex - 1));
         if (charIndex - 1 === 0) {
           setDeleting(false);
@@ -47,7 +45,6 @@ export default function Hero() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // Small delay to trigger the entrance animation cleanly
     const t = setTimeout(() => setMounted(true), 100);
     return () => clearTimeout(t);
   }, []);
@@ -56,18 +53,21 @@ export default function Hero() {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const fade = (delay: string) =>
+    `transition-all duration-700 ${delay} ${
+      mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+    }`;
+
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-background">
-      {/* ── Animated grid background ── */}
+      {/* Grid background */}
       <div
         className="absolute inset-0 bg-grid-pattern bg-grid opacity-100 pointer-events-none"
         aria-hidden="true"
       />
-
-      {/* ── Radial gradient blobs ── */}
+      {/* Gradient blobs */}
       <div className="absolute inset-0 bg-hero-gradient pointer-events-none" aria-hidden="true" />
-
-      {/* ── Noise / grain texture ── */}
+      {/* Grain */}
       <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{
@@ -77,22 +77,34 @@ export default function Hero() {
         }}
         aria-hidden="true"
       />
-
-      {/* ── Floating accent circles ── */}
+      {/* Floating circles */}
       <div className="absolute top-1/4 right-1/4 w-64 h-64 rounded-full bg-primary/5 blur-3xl animate-float pointer-events-none" />
       <div
         className="absolute bottom-1/3 left-1/5 w-48 h-48 rounded-full bg-secondary/5 blur-3xl animate-float pointer-events-none"
         style={{ animationDelay: "1.5s" }}
       />
 
-      {/* ── Main content ── */}
+      {/* Main content */}
       <div className="relative max-w-[1100px] mx-auto px-6 py-32 pt-40 w-full">
-        <div className="max-w-3xl">
+        <div className="max-w-3xl mx-auto flex flex-col items-center text-center">
+          {/* 1) Image */}
+          <div className={`relative mb-8 ${fade("")}`}>
+            <div className="absolute -inset-1.5 rounded-full bg-gradient-to-r from-primary to-secondary opacity-80 blur-sm" />
+            <div className="relative w-40 h-40 sm:w-48 sm:h-48 rounded-full overflow-hidden">
+              <Image
+                src="/profile.jpg"
+                alt={personalInfo.name}
+                width={192}
+                height={192}
+                priority
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+
           {/* Available badge */}
           <div
-            className={`inline-flex items-center gap-2 bg-green-500/10 border border-green-500/20 text-green-400 text-sm font-mono px-3 py-1.5 rounded-full mb-8 transition-all duration-700 ${
-              mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-            }`}
+            className={`inline-flex items-center gap-2 bg-green-500/10 border border-green-500/20 text-green-400 text-sm font-mono px-3 py-1.5 rounded-full mb-6 ${fade("delay-100")}`}
           >
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
@@ -101,11 +113,9 @@ export default function Hero() {
             Available for opportunities
           </div>
 
-          {/* Name */}
+          {/* 2) Name */}
           <h1
-            className={`font-display font-bold text-5xl sm:text-6xl lg:text-7xl text-text leading-[1.05] mb-4 transition-all duration-700 delay-100 ${
-              mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-            }`}
+            className={`font-display font-bold text-5xl sm:text-6xl lg:text-7xl text-text leading-[1.05] mb-4 ${fade("delay-200")}`}
           >
             Hi, I&apos;m{" "}
             <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
@@ -113,36 +123,19 @@ export default function Hero() {
             </span>
           </h1>
 
-          {/* Typing subtitle */}
-          <div
-            className={`h-12 sm:h-14 flex items-center mb-6 transition-all duration-700 delay-200 ${
-              mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-            }`}
-          >
+          {/* 3) Title (typing) */}
+          <div className={`h-12 sm:h-14 flex items-center justify-center mb-10 ${fade("delay-300")}`}>
             <span className="font-display font-semibold text-2xl sm:text-3xl text-primary">
               {typedText}
             </span>
             <span className="ml-1 inline-block w-0.5 h-7 sm:h-8 bg-primary animate-typing-blink" />
           </div>
 
-          {/* Tagline */}
-          <p
-            className={`text-base sm:text-lg font-body text-muted leading-relaxed max-w-xl mb-10 transition-all duration-700 delay-300 ${
-              mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-            }`}
-          >
-            {bio}
-          </p>
-
           {/* CTA Buttons */}
-          <div
-            className={`flex flex-col sm:flex-row gap-4 transition-all duration-700 delay-[400ms] ${
-              mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-            }`}
-          >
+          <div className={`flex flex-col sm:flex-row gap-4 justify-center ${fade("delay-[400ms]")}`}>
             <button
               onClick={() => scrollTo("projects")}
-              className="group inline-flex items-center gap-2 px-7 py-3.5 bg-primary hover:bg-primary-dark text-white font-body font-semibold rounded-xl transition-all duration-300 shadow-glow-primary hover:shadow-none hover:-translate-y-0.5"
+              className="group inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-primary hover:bg-primary-dark text-white font-body font-semibold rounded-xl transition-all duration-300 shadow-glow-primary hover:shadow-none hover:-translate-y-0.5"
             >
               View My Work
               <svg
@@ -158,7 +151,7 @@ export default function Hero() {
             <a
               href="/Ola_Farhat_CV.pdf"
               download="Ola_Farhat_CV.pdf"
-              className="group inline-flex items-center gap-2 px-7 py-3.5 bg-white/5 hover:bg-white/10 text-text font-body font-semibold rounded-xl border border-white/10 hover:border-primary/40 transition-all duration-300 hover:-translate-y-0.5"
+              className="group inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-white/5 hover:bg-white/10 text-text font-body font-semibold rounded-xl border border-white/10 hover:border-primary/40 transition-all duration-300 hover:-translate-y-0.5"
             >
               <svg
                 className="w-4 h-4 text-primary group-hover:scale-110 transition-transform"
@@ -173,11 +166,7 @@ export default function Hero() {
           </div>
 
           {/* Quick contact links */}
-          <div
-            className={`flex items-center gap-5 mt-10 transition-all duration-700 delay-500 ${
-              mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-            }`}
-          >
+          <div className={`flex items-center justify-center gap-5 mt-10 ${fade("delay-500")}`}>
             <span className="text-xs font-mono text-muted/60 uppercase tracking-widest">Find me on</span>
             <a
               href={personalInfo.github}

@@ -8,7 +8,7 @@ const navLinks = [
   { label: "Skills", href: "#skills" },
   { label: "Experience", href: "#experience" },
   { label: "Projects", href: "#projects" },
-  { label: "Certifications", href: "#certifications" },
+  { label: "Education", href: "#education" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -99,7 +99,7 @@ export default function Navbar() {
           })}
           <li>
             <a
-              href="/Ola_Farhat_CV.pdf"
+              href={personalInfo.cvPath}
               download="Ola_Farhat_CV.pdf"
               className="ml-3 px-4 py-2 text-sm font-body font-semibold text-white bg-primary hover:bg-primary-dark rounded-lg transition-all duration-200 shadow-glow-primary hover:shadow-none"
             >

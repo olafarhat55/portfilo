@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+import Image from "next/image";
 import { Project } from "@/data/portfolio";
 
 type ProjectCardProps = {
@@ -8,6 +10,9 @@ type ProjectCardProps = {
 };
 
 export default function ProjectCard({ project, index }: ProjectCardProps) {
+  const [imgError, setImgError] = useState(false);
+  const showImage = project.image && !imgError;
+
   return (
     <div
       className={`group relative flex flex-col bg-card border rounded-2xl overflow-hidden transition-all duration-500
@@ -18,6 +23,39 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
         }`}
       style={{ animationDelay: `${index * 100}ms` }}
     >
+      {/* Project image */}
+      <div className="relative w-full aspect-video overflow-hidden bg-surface">
+        {showImage ? (
+          <Image
+            src={project.image as string}
+            alt={`${project.title} screenshot`}
+            fill
+            sizes="(max-width: 640px) 100vw, 550px"
+            onError={() => setImgError(true)}
+            className={`object-cover object-top transition-transform duration-700 group-hover:scale-105 ${
+              project.comingSoon ? "grayscale opacity-60" : ""
+            }`}
+          />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-primary/10 to-secondary/5">
+            <svg
+              className="w-12 h-12 text-primary/40"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1.2}
+                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+              />
+            </svg>
+          </div>
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-card/60 via-transparent to-transparent pointer-events-none" />
+      </div>
+
       {/* Top gradient accent bar */}
       <div
         className={`h-1 w-full bg-gradient-to-r transition-all duration-500 ${
@@ -31,7 +69,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
         {/* Header */}
         <div className="flex items-start justify-between gap-3 mb-4">
           <div className="flex items-center gap-3">
-            {/* Folder icon */}
+            {/* Code icon */}
             <div
               className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
                 project.comingSoon

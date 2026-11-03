@@ -12,6 +12,7 @@ export const personalInfo = {
   linkedin: "https://www.linkedin.com/in/ola-farhat-473561268/",
   github: "https://github.com/olafarhat55",
   cvPath: "/Ola_Farhat_CV.pdf",
+  avatar: "/profile.jpg",
   available: true,
   typingTitles: [
     "Frontend Developer",
@@ -32,8 +33,8 @@ export const stats = [
 
 export const education = {
   degree: "B.Sc. Computer Science & AI",
-  institution: "Faculty of Computers & AI",
-  status: "Expected 2026",
+  institution: "Faculty of Computers & Artificial Intelligence, University of Sadat City",
+  status: "Graduated 2026 . Grade: Very Good",
 };
 
 // ─── SKILLS ───────────────────────────────────────────────
@@ -123,11 +124,13 @@ export const experiences: Experience[] = [
 ];
 
 // ─── PROJECTS ─────────────────────────────────────────────
+// Put each image in /public/projects/ (recommended size: 1200x675)
 
 export type Project = {
   title: string;
   description: string;
   techStack: string[];
+  image?: string;
   github?: string;
   live?: string;
   features?: string[];
@@ -139,6 +142,7 @@ export const projects: Project[] = [
     title: "MiniMaxi — AI Predictive Maintenance Platform",
     description:
       "A graduation-project SaaS platform for predictive equipment maintenance, featuring AI-powered insights, role-based dashboards for Admins, Engineers, and Technicians, and full Arabic/RTL localisation.",
+    image: "/projects/minimaxi.png",
     techStack: [
       "React.js",
       "TypeScript",
@@ -160,6 +164,7 @@ export const projects: Project[] = [
     title: "E-Commerce UI Clone (ShopMart)",
     description:
       "A fully responsive e-commerce UI built from scratch with shopping cart, product filtering, and clean component architecture.",
+    image: "/projects/shopmart.png",
     techStack: ["React.js", "Context API", "CSS Grid", "Flexbox", "Tailwind CSS"],
     github: "https://github.com/olafarhat55/shopmart",
     live: "https://shopmart-eight.vercel.app/",
@@ -173,6 +178,7 @@ export const projects: Project[] = [
     title: "Dashboard UI Kit",
     description:
       "A modern, dark-themed admin dashboard with data visualisation components, responsive sidebar, and reusable widget cards.",
+    image: "/projects/dashboard-ui-kit.png",
     techStack: ["Next.js", "TypeScript", "Tailwind CSS"],
     github: "https://github.com/olafarhat55/dashboard-ui-kit",
     live: "https://dashboard-ui-kit-three.vercel.app/",
@@ -181,6 +187,7 @@ export const projects: Project[] = [
     title: "Blog Platform",
     description:
       "A full-featured blog with SSG, dynamic routing, Markdown support, and SEO-optimised pages built with Next.js App Router.",
+    image: "/projects/blog-platform.png",
     techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Markdown"],
     github: "https://github.com/olafarhat55/blog-platform",
     live: "https://blog-platform-virid-nu.vercel.app/",
@@ -189,13 +196,14 @@ export const projects: Project[] = [
     title: "Component Library",
     description:
       "A personal collection of accessible, animated React components following atomic design principles.",
+    image: "/projects/component-library.png",
     techStack: ["React.js", "TypeScript", "Storybook", "Tailwind CSS"],
     live: "https://component-library-tan-five.vercel.app/",
     github: "https://github.com/olafarhat55/component-library",
   },
 ];
 
-// ─── CERTIFICATIONS ───────────────────────────────────────
+// ─── CERTIFICATIONS (not shown in the page anymore, kept for CertCard) ───
 
 export type Certification = {
   title: string;
